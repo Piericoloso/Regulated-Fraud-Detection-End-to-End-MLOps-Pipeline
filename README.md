@@ -1,6 +1,6 @@
 # Regulated-Fraud-Detection-End-to-End-MLOps-Pipeline
 
-##Business framing (simple, realistic):
+## Business framing (simple, realistic):
 
 Detect potentially fraudulent card-not-present transactions
 
@@ -8,7 +8,7 @@ Output is a risk score, not an automatic block
 
 Used for analyst triage, not final decisions
 
-##Regulated angle:
+## Regulated angle:
 
 Decisions can affect customers → requires traceability, monitoring, rollback
 
