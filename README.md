@@ -13,3 +13,9 @@ Used for analyst triage, not final decisions
 Decisions can affect customers → requires traceability, monitoring, rollback
 
 Model must be explainable, versioned, and auditable
+
+## Governance & Documentation
+
+- [Model Card](docs/model_card.md)
+- [Data Sheet](docs/data_sheet.md)
+- [Governance Checklist](docs/governance_checklist.md)
