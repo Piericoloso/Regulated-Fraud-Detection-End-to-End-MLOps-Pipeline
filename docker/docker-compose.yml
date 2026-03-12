@@ -1,0 +1,27 @@
+services:
+  mlflow:
+    image: python:3.11-slim
+    working_dir: /mlflow
+    volumes:
+      - ../mlruns:/mlflow/mlruns
+    ports:
+      - "5000:5000"
+    command: >
+      bash -lc "pip install --no-cache-dir mlflow==2.13.0 &&
+      mlflow server
+      --host 0.0.0.0
+      --port 5000
+      --backend-store-uri /mlflow/mlruns
+      --default-artifact-root /mlflow/mlruns"
+
+  api:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    depends_on:
+      - mlflow
+    ports:
+      - "8000:8000"
+    volumes:
+      - ../configs:/app/configs
+      - ../mlruns:/app/mlruns

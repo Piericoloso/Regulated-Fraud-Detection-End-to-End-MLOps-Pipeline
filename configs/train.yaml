@@ -1,0 +1,19 @@
+seed: 42
+n_rows: 25000
+drift_mode: "none"   # none | mild | severe
+
+target:
+  name: "is_suspicious"
+
+split:
+  test_size: 0.2
+
+model:
+  type: "logreg"     # logreg | xgb (optional later)
+  C: 1.0
+  max_iter: 200
+
+mlflow:
+  tracking_uri: "http://localhost:5000"
+  experiment_name: "regulated-mlops"
+  registered_model_name: "fincrime_suspicious_txn"

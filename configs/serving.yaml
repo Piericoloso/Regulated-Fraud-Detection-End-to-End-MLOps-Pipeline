@@ -1,0 +1,4 @@
+mlflow:
+  tracking_uri: "http://mlflow:5000"
+  registered_model_name: "fincrime_suspicious_txn"
+  stage: "Production"

@@ -1,0 +1,22 @@
+[project]
+name = "regulated-mlops-pipeline"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = [
+  "numpy>=1.26",
+  "pandas>=2.2",
+  "scikit-learn>=1.4",
+  "pyyaml>=6.0",
+  "mlflow>=2.13",
+  "fastapi>=0.110",
+  "uvicorn>=0.29",
+  "pydantic>=2.6",
+  "python-json-logger>=2.0",
+  "requests>=2.31",
+  "pytest>=8.0",
+  "ruff>=0.6.0",
+]
+
+[tool.ruff]
+line-length = 100
+select = ["E", "F", "I", "B"]
