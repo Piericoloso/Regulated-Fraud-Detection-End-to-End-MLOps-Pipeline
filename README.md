@@ -25,6 +25,15 @@ Key regulatory considerations addressed in this project include:
 
 The system follows a simple, modular architecture:
 
+```mermaid
+flowchart LR
+    A[Data] --> B[Feature Engineering]
+    B --> C[Model Training & Evaluation]
+    C --> D[Model Registry]
+    E --> F[Inference API]
+    F --> G[PSI Drift Monitoring]
+```
+
 Data → Feature Engineering → Model Training & Evaluation → Model Registry → Inference API → Monitoring & Drift Detection
 
 A detailed architecture diagram and implementation details are provided in later sections.
