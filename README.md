@@ -37,15 +37,87 @@ flowchart LR
 A detailed architecture diagram and implementation details are provided in later sections.
 
 
-## Training & evaluation
+## Training & Evaluation
 
-## Model registry & promotion
+Model training is implemented through a reproducible pipeline defined in `src/models/train.py` and configured through `configs/train.yaml`.
 
-## Serving & deployment
+The training workflow includes:
 
-## Monitoring & governance
+- Synthetic transaction data generation to simulate a fraud detection scenario
+- Feature preparation and schema validation
+- Train/test split with reproducibility controlled by configuration
+- A baseline Logistic Regression model implemented using a Scikit-learn pipeline
+- Model evaluation using multiple metrics
 
-##Quickstart
+Evaluation metrics include:
+
+- ROC-AUC (overall discrimination)
+- PR-AUC (performance on the positive class)
+- Brier score (probability calibration)
+- Positive prediction rate
+
+All experiment parameters, metrics and artifacts are logged using **MLflow**, enabling reproducible experimentation and traceability of model runs.
+
+## Model Registry & Promotion
+
+Trained models are registered in the **MLflow Model Registry**, which provides versioning and stage management.
+
+The project uses a stage-based lifecycle:
+
+- **Staging** – candidate models produced during training
+- **Production** – approved models used for inference
+
+The registry workflow enables:
+
+- tracking model lineage through MLflow run IDs
+- promoting models between stages without changing application code
+- maintaining reproducibility of model artifacts and parameters
+
+The inference service loads the model dynamically from the registry using a model URI of the form:
+
+models:/<model_name>/<stage>
+
+This decouples model training from deployment and allows safe model promotion or rollback.
+
+## Serving & Deployment
+
+Model inference is exposed through a **FastAPI service** implemented in `src/serving/app.py`.
+
+The service performs the following steps:
+
+1. Loads the production model from the MLflow registry at application startup
+2. Validates incoming prediction requests using **Pydantic schemas**
+3. Converts requests into a tabular format compatible with the trained model
+4. Generates fraud probability scores
+5. Applies a simple decision threshold to produce a binary prediction
+6. Logs prediction metadata for monitoring purposes
+
+The API exposes two endpoints:
+
+- `/health` – service health check
+- `/predict` – fraud probability prediction
+
+This architecture reflects common patterns used in ML-powered risk systems where models are served through a stable inference interface.
+
+## Serving & Deployment
+
+Model inference is exposed through a **FastAPI service** implemented in `src/serving/app.py`.
+
+The service performs the following steps:
+
+1. Loads the production model from the MLflow registry at application startup
+2. Validates incoming prediction requests using **Pydantic schemas**
+3. Converts requests into a tabular format compatible with the trained model
+4. Generates fraud probability scores
+5. Applies a simple decision threshold to produce a binary prediction
+6. Logs prediction metadata for monitoring purposes
+
+The API exposes two endpoints:
+
+- `/health` – service health check
+- `/predict` – fraud probability prediction
+
+This architecture reflects common patterns used in ML-powered risk systems where models are served through a stable inference interface.
 
 ## Governance & Documentation
 
