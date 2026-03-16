@@ -99,25 +99,6 @@ The API exposes two endpoints:
 
 This architecture reflects common patterns used in ML-powered risk systems where models are served through a stable inference interface.
 
-## Serving & Deployment
-
-Model inference is exposed through a **FastAPI service** implemented in `src/serving/app.py`.
-
-The service performs the following steps:
-
-1. Loads the production model from the MLflow registry at application startup
-2. Validates incoming prediction requests using **Pydantic schemas**
-3. Converts requests into a tabular format compatible with the trained model
-4. Generates fraud probability scores
-5. Applies a simple decision threshold to produce a binary prediction
-6. Logs prediction metadata for monitoring purposes
-
-The API exposes two endpoints:
-
-- `/health` – service health check
-- `/predict` – fraud probability prediction
-
-This architecture reflects common patterns used in ML-powered risk systems where models are served through a stable inference interface.
 
 ## Governance & Documentation
 
