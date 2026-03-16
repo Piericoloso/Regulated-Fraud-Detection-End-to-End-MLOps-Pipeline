@@ -1,43 +1,16 @@
-# Data Sheet — Fraud Detection Synthetic Dataset
+# Data Sheet — Synthetic AML-like Transactions
 
-## 1. Motivation
-Why this dataset exists and what task it supports.
+## Motivation
+Provide a license-safe, reproducible dataset for regulated MLOps demos.
 
-## 2. Dataset Composition
-- Number of rows
-- Number of features
-- Target variable definition
-- Class balance (approximate)
+## Composition
+Rows: configurable (default 25k). Label is_suspicious (0/1).
 
-## 3. Data Generation Process
-- Synthetic generation approach
-- Risk logic used to derive labels
-- Random seed & reproducibility guarantees
+## Collection process
+Generated via scripted distributions + transparent scoring function + Bernoulli sampling.
 
-## 4. Feature Description
-| Feature | Type | Description | Notes |
-|-------|------|-------------|------|
+## Preprocessing
+Standard scaling for Logistic Regression.
 
-## 5. Data Validation & Quality Checks
-- Schema validation
-- Range checks
-- Missing value handling
-
-## 6. Drift & Variants
-- Supported drift scenarios
-- How drift is simulated
-- Intended use for monitoring tests
-
-## 7. Privacy & PII Considerations
-- Presence of PII: No
-- Data sensitivity classification
-- Implications for regulated environments
-
-## 8. Intended Use
-- Supported use cases
-- Out-of-scope uses
-
-## 9. Limitations
-- Synthetic nature
-- Simplified fraud logic
-- Not representative of any specific institution
+## Retention & privacy
+No PII. No retention constraints. Mirrors governance structure used with real data.
